@@ -25,15 +25,17 @@ export class SignInUseCase {
 
     return {
       user,
-      access_token: await this.jwtService.signAsync(payload, {
-        expiresIn: this.envService.get('AUTH_ACCESS_TOKEN_EXPIRATION'),
-        secret: this.envService.get('JWT_SECRET'),
-      }),
-      refresh_token: await this.jwtService.signAsync(payload, {
-        expiresIn: this.envService.get('AUTH_REFRESH_TOKEN_EXPIRATION'),
-        secret: this.envService.get('JWT_REFRESH_TOKEN_SECRET'),
-      }),
-      expiresIn: new Date().setTime(new Date().getTime() + this.EXPIRE_TIME),
+      tokens: {
+        access_token: await this.jwtService.signAsync(payload, {
+          expiresIn: this.envService.get('AUTH_ACCESS_TOKEN_EXPIRATION'),
+          secret: this.envService.get('JWT_SECRET'),
+        }),
+        refresh_token: await this.jwtService.signAsync(payload, {
+          expiresIn: this.envService.get('AUTH_REFRESH_TOKEN_EXPIRATION'),
+          secret: this.envService.get('JWT_REFRESH_TOKEN_SECRET'),
+        }),
+        expiresIn: new Date().setTime(new Date().getTime() + this.EXPIRE_TIME),
+      },
     };
   }
 
