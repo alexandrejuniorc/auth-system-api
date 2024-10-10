@@ -1,0 +1,15 @@
+@server = http://localhost:7899
+
+### CREATE USER
+POST {{server}}/users/create
+Content-Type: application/json
+
+{ 
+    "name": "John Doe",
+    "email": "johndoe@mail.com",
+    "password": "12345678"
+}
+
+### FIND ALL USERS
+GET {{server}}/users/all
+Content-Type: application/json
