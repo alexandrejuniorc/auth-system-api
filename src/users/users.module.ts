@@ -6,5 +6,6 @@ import { UserUseCases } from './use-cases';
 @Module({
   controllers: [UsersController],
   providers: [UsersService, ...UserUseCases],
+  exports: [UsersService],
 })
 export class UsersModule {}
