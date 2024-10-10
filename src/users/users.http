@@ -2,15 +2,10 @@
 @server = http://localhost:{{port}}
 
 
-### CREATE USER
-POST {{server}}/users/create
+### WHOAMI
+GET {{server}}/users/4f89e909-3c4d-4737-a073-160cdac372f2
 Content-Type: application/json
 
-{ 
-    "name": "John Doe",
-    "email": "johndoe@mail.com",
-    "password": "12345678"
-}
 
 ### FIND ALL USERS
 GET {{server}}/users/all

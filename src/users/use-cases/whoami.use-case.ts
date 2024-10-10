@@ -2,10 +2,10 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/global/prisma.service';
 
 @Injectable()
-export class FindAllUsersUseCase {
+export class WhoamiUseCase {
   constructor(private prismaService: PrismaService) {}
 
-  async execute() {
-    return await this.prismaService.user.findMany();
+  async execute(id: string) {
+    return this.prismaService.user.findUnique({ where: { id } });
   }
 }
