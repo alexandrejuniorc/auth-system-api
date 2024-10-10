@@ -1,4 +1,6 @@
-@server = http://localhost:7899
+@port = 3000
+@server = http://localhost:{{port}}
+
 
 ### CREATE USER
 POST {{server}}/users/create
