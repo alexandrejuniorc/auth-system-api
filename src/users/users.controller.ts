@@ -11,9 +11,4 @@ export class UsersController {
   async whoami(@Param('id') id: string) {
     return await this.usersService.whoami(id);
   }
-
-  @Get('all')
-  async findAllUsers() {
-    return await this.usersService.findAllUsers();
-  }
 }
