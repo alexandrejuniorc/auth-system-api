@@ -1,15 +1,20 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Post, Request, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { SignInDTO } from './dto/sign-in.dto';
-import { IsPublicRoute } from './infra/decorators/is-public-route.decorator';
+import { RefreshTokenJwtGuard } from './infra/guards/refresh-token.guard';
 
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
 
-  @IsPublicRoute()
   @Post('sign-in')
   async signIn(@Body() dto: SignInDTO) {
     return await this.authService.signIn(dto);
+  }
+
+  @UseGuards(RefreshTokenJwtGuard)
+  @Post('refresh-token')
+  async refreshToken(@Request() req) {
+    return await this.authService.refreshToken(req.user);
   }
 }

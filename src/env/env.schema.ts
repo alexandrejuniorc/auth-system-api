@@ -7,6 +7,7 @@ export const EnvModuleValidationSchema = z.object({
     .default('development'),
 
   JWT_SECRET: z.string().min(10),
+  JWT_REFRESH_TOKEN_SECRET: z.string().min(10),
   AUTH_ACCESS_TOKEN_EXPIRATION: z.string().min(2),
   AUTH_REFRESH_TOKEN_EXPIRATION: z.string().min(2),
 });

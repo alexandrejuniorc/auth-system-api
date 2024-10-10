@@ -9,7 +9,7 @@ import { Request } from 'express';
 import { EnvService } from 'src/env/env.service';
 
 @Injectable()
-export class JwtGuard implements CanActivate {
+export class RefreshTokenJwtGuard implements CanActivate {
   constructor(
     private jwtService: JwtService,
     private envService: EnvService,
@@ -22,7 +22,7 @@ export class JwtGuard implements CanActivate {
 
     try {
       const payload = await this.jwtService.verifyAsync(token, {
-        secret: this.envService.get('JWT_SECRET'),
+        secret: this.envService.get('JWT_REFRESH_TOKEN_SECRET'),
       });
       request['user'] = payload;
     } catch {
@@ -34,6 +34,6 @@ export class JwtGuard implements CanActivate {
 
   private extractTokenFromHeader(request: Request) {
     const [type, token] = request.headers.authorization?.split(' ') ?? [];
-    return type === 'Bearer' ? token : undefined;
+    return type === 'Refresh' ? token : undefined;
   }
 }
